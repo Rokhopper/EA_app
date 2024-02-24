@@ -24,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
+        centerTitle: true,
       ),
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
