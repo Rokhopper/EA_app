@@ -22,9 +22,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(20, 23, 36, 100),
+      backgroundColor: const Color.fromRGBO(20, 23, 36, 100),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(20, 23, 36, 100),
+        backgroundColor: const Color.fromRGBO(20, 23, 36, 100),
         title: const Text('Sign in to your Account',
           style: TextStyle(color: Colors.white),
         ),
@@ -33,25 +33,31 @@ class _LoginPageState extends State<LoginPage> {
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text('EMAIL',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            Flexible(
+                child: Padding(
+                  padding:  const EdgeInsets.all(40.0),
+                  child: Container(
+                    child: const Image(
+                      image: NetworkImage('https://media.contentapi.ea.com/content/dam/eacom/common/medallion-violet.png'),
+                      width: 200,
+                      height: 200,
+                    ),
+                  ),
+                ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: TextFormField(
               controller: _emailController,
               textAlign: TextAlign.left,
+              style: const TextStyle(color: Colors.white),
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                hintText: 'Enter your email',
+                labelText: 'Enter your email',
                 hintStyle: TextStyle(color: Colors.grey),
-                contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
@@ -61,20 +67,15 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 8.0,
             ),
-            Text('PASSWORD',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: TextField(
               controller: _passwordController,
               textAlign: TextAlign.left,
+              style: const TextStyle(color: Colors.white),
               obscureText: true,
               decoration: const InputDecoration(
-                hintText: 'Enter your password',
+                labelText: 'Enter your password',
                 hintStyle: TextStyle(color: Colors.grey),
                 contentPadding:
                 EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -88,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: Material(
                   elevation: 5.0,
-                  color: Color.fromRGBO(35, 95, 227, 100),
+                  color: const Color.fromRGBO(110, 52, 235, 100),
                   borderRadius: BorderRadius.circular(10.0),
                   child: MaterialButton(
                     onPressed: () async{
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                         user = userCredential.user;
                         if(user != null)
                         {
-                          Navigator.pushNamed(context, "profile");
+                          Navigator.pushNamed(context, "main");
                         }
                         setState(() {
                           showSpinner = false;
@@ -120,10 +121,8 @@ class _LoginPageState extends State<LoginPage> {
                       {
                         print(e);
                       }
-
-
                     },
-                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 150.0),
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 150.0),
                     height: 42.0,
                     child: const Text(
                       'SIGN IN',
@@ -141,7 +140,10 @@ class _LoginPageState extends State<LoginPage> {
             InkWell(
                 child: const Text(
                 'CREATE ACCOUNT',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold
+                ),
               ),
               onTap: () {
                 Navigator.pushNamed(context, 'register');

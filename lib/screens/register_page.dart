@@ -22,25 +22,67 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(20, 23, 36, 100),
       appBar: AppBar(
-        title: const Text('Register'),
+        title: const Text(
+          'Create your Account',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: const Color.fromRGBO(20, 23, 36, 100),
         centerTitle: true,
       ),
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Flexible(
+              child: Padding(
+                padding:  const EdgeInsets.all(40.0),
+                child: Container(
+                  child: const Image(
+                    image: NetworkImage('https://media.contentapi.ea.com/content/dam/eacom/common/medallion-violet.png'),
+                    width: 200,
+                    height: 200,
+                  ),
+                ),
+              ),
+            ),
+              Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: TextFormField(
+                  controller: _nameController,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: 'Enter Name',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                ),
+              ),
 
-            TextFormField(
-              controller: _nameController,
-              textAlign: TextAlign.center,
-              decoration: const InputDecoration(
-                hintText: 'Enter Name',
-                contentPadding:
-                EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+            const SizedBox(
+              height: 8.0,
+            ),
+            Container(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: TextFormField(
+                controller: _emailController,
+                textAlign: TextAlign.left,
+                style: const TextStyle(color: Colors.white),
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  labelText: 'Enter Email',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  contentPadding:
+                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
                 ),
               ),
             ),
@@ -48,41 +90,31 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: 8.0,
             ),
-            TextFormField(
-              controller: _emailController,
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                hintText: 'Enter Email',
-                contentPadding:
-                EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+            Container(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: TextField(
+                controller: _passwordController,
+                textAlign: TextAlign.left,
+                style: const TextStyle(color: Colors.white),
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Enter Password',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  contentPadding:
+                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 8.0,
-            ),
-            TextField(
-              controller: _passwordController,
-              textAlign: TextAlign.center,
-              obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Enter Password',
-                contentPadding:
-                EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
-            ),
+
 
             Padding(padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: Material(
                   elevation: 5.0,
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(30.0),
+                  color: const Color.fromRGBO(110, 52, 235, 100),
+                  borderRadius: BorderRadius.circular(10.0),
                   child: MaterialButton(
                     onPressed: () async{
                       setState(() {
@@ -118,20 +150,22 @@ class _RegisterPageState extends State<RegisterPage> {
                       }
 
                     },
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 143.0),
                     minWidth: 200.0,
                     height: 42.0,
                     child: const Text(
-                      'Register',
+                      'REGISTER',
                       style: TextStyle(
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 )
             ),
-
           ],
         ),
-      ),    );
+      ),
+    );
   }
 }

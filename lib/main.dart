@@ -1,3 +1,5 @@
+import 'package:program/screens/main_page.dart';
+
 import 'screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_page.dart';
@@ -27,14 +29,14 @@ class MyApp extends StatelessWidget {
       title: 'Authentication',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: const Color.fromRGBO(110, 52, 235, 100),
       ),
       home: const LoginPage(),
       initialRoute: '/',
       routes: {
         'register': (context) => const RegisterPage(),
         'profile': (context) => const ProfilePage(),
-
+        'main': (context) => const MainPage(),
       },
     );
   }
