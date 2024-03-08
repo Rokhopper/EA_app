@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'login_page.dart';
+import 'main_page.dart';
+
+enum SampleItem { itemOne, itemTwo, itemThree }
 
 class ProfilePage extends StatefulWidget {
 
@@ -11,6 +15,8 @@ class _ProfilePageState extends State<ProfilePage> {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user;
 
+  SampleItem? selectedItem;
+
   @override
   void initState() {
     super.initState();
@@ -20,36 +26,89 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(20, 23, 36, 100),
       appBar: AppBar(
-        title: const Text('Profile'),
+        leading: IconButton(
+          color: Colors.white,
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const MainPage(),
+              ),
+            );
+          },
+        ),
+        title: const Text(
+          'Profile',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: const Color.fromRGBO(20, 23, 36, 100),
         automaticallyImplyLeading: false,
         actions: [
-          IconButton(
-            onPressed: () async{
-              await FirebaseAuth.instance.signOut();
-              // Navigator.pop(context);
-              Navigator.pushNamed(context, '/');
-            },
-            icon: const Icon(Icons.logout),
-          )
+          PopupMenuButton<SampleItem>(
+              initialValue: selectedItem,
+              onSelected: (SampleItem item) {
+                setState(() {
+                  selectedItem = item;
+                });
+              },
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
+            PopupMenuItem<SampleItem>(
+              value: SampleItem.itemOne,
+              child: ListTile(
+                leading: const Icon(Icons.login),
+                title: const Text('Login'),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const PopupMenuItem<SampleItem>(
+              value: SampleItem.itemTwo,
+              child: ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('Settings'),
+              ),
+            ),
+              PopupMenuItem<SampleItem>(
+                value: SampleItem.itemThree,
+                child: ListTile(
+                  leading: const Icon(Icons.logout),
+                  title: const Text('Logout'),
+                  onTap: () async{
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushNamed(context, '/');
+                  },
+                ),
+              ),
+            ],
+          ),
         ],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'NAME: ${user?.displayName} ',
-              style: Theme.of(context).textTheme.bodyMedium,
+            const Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 250.0,
             ),
-            const SizedBox(height: 16.0),
             Text(
-              'EMAIL: ${user?.email}',
-              style: Theme.of(context).textTheme.bodyMedium,
+              '${user?.displayName}',
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 50.0,
+                ),
             ),
           ],
         ),

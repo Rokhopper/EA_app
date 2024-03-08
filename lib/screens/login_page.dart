@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:program/screens/profile_page.dart';
+import 'register_page.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginPage extends StatefulWidget {
@@ -104,7 +106,11 @@ class _LoginPageState extends State<LoginPage> {
                         user = userCredential.user;
                         if(user != null)
                         {
-                          Navigator.pushNamed(context, "main");
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const ProfilePage(),
+                            ),
+                          );
                         }
                         setState(() {
                           showSpinner = false;
@@ -146,7 +152,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               onTap: () {
-                Navigator.pushNamed(context, 'register');
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const RegisterPage(),
+                  ),
+                );
               },
             ),
           ],

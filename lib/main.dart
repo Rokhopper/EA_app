@@ -1,10 +1,9 @@
-import 'package:program/screens/main_page.dart';
-
 import 'screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_page.dart';
 import 'screens/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'screens/main_page.dart';
 
 void main()  async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,14 +28,14 @@ class MyApp extends StatelessWidget {
       title: 'Authentication',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: const Color.fromRGBO(110, 52, 235, 100),
-      ),
-      home: const LoginPage(),
+      primaryColor: const Color.fromRGBO(110, 52, 235, 100),
+    ),
+      home: const MainPage(),
       initialRoute: '/',
       routes: {
         'register': (context) => const RegisterPage(),
         'profile': (context) => const ProfilePage(),
-        'main': (context) => const MainPage(),
+        'login': (context) => const LoginPage(),
       },
     );
   }

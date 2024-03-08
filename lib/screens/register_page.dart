@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -130,7 +131,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         await user!.reload();
                         user = auth.currentUser;
                         if (user != null) {
-                          Navigator.pushNamed(context, "profile");
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ),
+                          );
                         }
                         setState(() {
                           showSpinner = false;
